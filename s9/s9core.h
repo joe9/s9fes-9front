@@ -236,7 +236,7 @@ struct S9_primitive {
  * Access to fields of atoms
  */
 
-#define tag(n)			(S9_tag[n])
+#define s9_tag(n)			(S9_tag[n])
 
 #define s9_string(n)		((char *) &Vectors[S9_cdr[n]])
 #define s9_string_len(n)	(Vectors[S9_cdr[n] - 1])
@@ -298,45 +298,45 @@ struct S9_primitive {
 #define s9_boolean_p(n)	\
 	((n) == S9_TRUE || (n) == S9_FALSE)
 
-#define s9_constant_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_CONST_TAG))
+#define s9_constant_p(n)				\
+    (!s9_special_p(n) && (s9_tag(n) & S9_CONST_TAG))
 
-#define s9_integer_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && car(n) == S9_T_INTEGER)
-#define s9_number_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && \
-	 (car(n) == S9_T_REAL || car(n) == S9_T_INTEGER))
-#define s9_primitive_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && \
+#define s9_integer_p(n)							\
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) && car(n) == S9_T_INTEGER)
+#define s9_number_p(n)					\
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) &&	\
+     (car(n) == S9_T_REAL || car(n) == S9_T_INTEGER))
+#define s9_primitive_p(n)			     \
+	(!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) &&	\
 	 car(n) == S9_T_PRIMITIVE)
-#define s9_function_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && \
-	 car(n) == S9_T_FUNCTION)
-#define s9_continuation_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && \
-	 car(n) == S9_T_CONTINUATION)
-#define s9_real_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && car(n) == S9_T_REAL)
-#define s9_char_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && car(n) == S9_T_CHAR)
-#define s9_syntax_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && car(n) == S9_T_SYNTAX)
-#define s9_input_port_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && \
-	 (tag(n) & S9_PORT_TAG) && car(n) == S9_T_INPUT_PORT)
-#define s9_output_port_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_ATOM_TAG) && \
-	 (tag(n) & S9_PORT_TAG) && car(n) == S9_T_OUTPUT_PORT)
+#define s9_function_p(n)			     \
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) &&  \
+     car(n) == S9_T_FUNCTION)
+#define s9_continuation_p(n)			     \
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) &&  \
+     car(n) == S9_T_CONTINUATION)
+#define s9_real_p(n)							\
+	(!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) && car(n) == S9_T_REAL)
+#define s9_char_p(n)							\
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) && car(n) == S9_T_CHAR)
+#define s9_syntax_p(n)							\
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) && car(n) == S9_T_SYNTAX)
+#define s9_input_port_p(n)					\
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) &&		\
+     (s9_tag(n) & S9_PORT_TAG) && car(n) == S9_T_INPUT_PORT)
+#define s9_output_port_p(n)					\
+    (!s9_special_p(n) && (s9_tag(n) & S9_ATOM_TAG) &&		\
+     (s9_tag(n) & S9_PORT_TAG) && car(n) == S9_T_OUTPUT_PORT)
 
-#define s9_symbol_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_VECTOR_TAG) && car(n) == S9_T_SYMBOL)
-#define s9_vector_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_VECTOR_TAG) && car(n) == S9_T_VECTOR)
-#define s9_string_p(n) \
-	(!s9_special_p(n) && (tag(n) & S9_VECTOR_TAG) && car(n) == S9_T_STRING)
+#define s9_symbol_p(n)							\
+    (!s9_special_p(n) && (s9_tag(n) & S9_VECTOR_TAG) && car(n) == S9_T_SYMBOL)
+#define s9_vector_p(n)							\
+    (!s9_special_p(n) && (s9_tag(n) & S9_VECTOR_TAG) && car(n) == S9_T_VECTOR)
+#define s9_string_p(n)							\
+    (!s9_special_p(n) && (s9_tag(n) & S9_VECTOR_TAG) && car(n) == S9_T_STRING)
 
-#define s9_atom_p(n) \
-	(s9_special_p(n) || (tag(n) & S9_ATOM_TAG) || (tag(n) & S9_VECTOR_TAG))
+#define s9_atom_p(n)							\
+    (s9_special_p(n) || (s9_tag(n) & S9_ATOM_TAG) || (s9_tag(n) & S9_VECTOR_TAG))
 
 #define s9_pair_p(x) (!s9_atom_p(x))
 

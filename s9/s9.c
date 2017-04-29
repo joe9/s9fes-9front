@@ -1136,7 +1136,7 @@ int hash_size(int n) {
 void rehash(cell e) {
 	unsigned int	i;
 	cell		p, *v, new;
-	unsigned int	h, k = hash_size(length(e));
+	unsigned int	h, k = hash_size(s9_length(e));
 	char		*s;
 
 	if (Program == NIL || k < HASH_THRESHOLD)
@@ -1176,10 +1176,10 @@ cell make_env(cell rib, cell env) {
 	rib = cons(NIL, rib);
 	e = cons(rib, env);
 	Tmp = NIL;
-	if (length(rib) >= HASH_THRESHOLD) {
-		save(e);
-		rehash(rib);
-		unsave(1);
+	if (s9_length(rib) >= HASH_THRESHOLD) {
+	    save(e);
+	    rehash(rib);
+	    unsave(1);
 	}
 	return e;
 }
@@ -1393,7 +1393,7 @@ cell extract_from_defines(cell x, int part, cell *restp) {
 			break;
 		n = car(x);
 		if (	!proper_list_p(n) ||
-			(k = length(n)) < 3 ||
+			(k = s9_length(n)) < 3 ||
 			!argument_list_p(cadr(n)) ||
 			(symbol_p(cadr(n)) && k > 3)
 		)
@@ -1451,7 +1451,7 @@ cell sf_lambda(cell x) {
 	cell	n;
 	int	k;
 
-	k = length(x);
+	k = s9_length(x);
 	if (k < 3)
 		return too_few_args(x);
 	if (!argument_list_p(cadr(x)))
@@ -1515,7 +1515,7 @@ cell sf_define(int syntax, cell x, int *pc, int *ps) {
 				"define-syntax: invalid context":
 				"define: invalid context",
 				x);
-	k = length(x);
+	k = s9_length(x);
 	if (k < 3)
 		return too_few_args(x);
 	if (symbol_p(cadr(x)) && k > 3)

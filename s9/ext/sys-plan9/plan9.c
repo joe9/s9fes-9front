@@ -1026,7 +1026,7 @@ cell pp_sys_command_line(cell) {
 	return Argv;
 }
 
-#define	K(x)	{#x, (int)x}
+#define	K(x)	{"x", (int)x}
 struct Magic_const {
 	char*	name;
 	int	value;
@@ -1179,69 +1179,65 @@ S9_PRIM Plan9_primitives[] = {
  {NULL}
 };
 
-#define xcat(a,b)	a##b
-#define cat(a,b)	xcat(a,b)
-#define mksym(x)	cat(x,_sym) = symbol_ref(#x)
-
 void sys_init(void) {
-	//signal(SIGPIPE, SIG_IGN); //XXX ignore notes?
-	
-	mksym(afid);
-	mksym(aqid);
-	mksym(aname);
-	mksym(atime);
-	mksym(count);
-	mksym(data);
-	mksym(dev);
-	mksym(ename);
-	mksym(fid);
-	mksym(gid);
-	mksym(length);
-	mksym(mode);
-	mksym(msize);
-	mksym(mtime);
-	mksym(muid);
-	mksym(name);
-	mksym(newfid); 
-	mksym(offset);
-	mksym(oldtag);
-	mksym(perm);
-	mksym(qid);
-	mksym(stat);
-	mksym(type);
-	mksym(uid);
-	mksym(uname);
-	mksym(wname);
+    //signal(SIGPIPE, SIG_IGN); //XXX ignore notes?
 
-	mksym(dir);
-	mksym(Rattach);
-	mksym(Rauth);
-	mksym(Rclunk);
-	mksym(Rcreate);
-	mksym(Rerror);
-	mksym(Rflush);
-	mksym(Ropen);
-	mksym(Rread);
-	mksym(Rremove);
-	mksym(Rstat);
-	mksym(Rversion);
-	mksym(Rwalk);
-	mksym(Rwrite);
-	mksym(Rwstat);
-	mksym(Tattach);
-	mksym(Tauth);
-	mksym(Tclunk);
-	mksym(Tcreate);
-	mksym(Tflush);
-	mksym(Topen);
-	mksym(Tread);
-	mksym(Tremove);
-	mksym(Tstat);
-	mksym(Tversion);
-	mksym(Twalk);
-	mksym(Twrite);
-	mksym(Twstat);
+    afid_sym = symbol_ref("afid");
+    aqid_sym = symbol_ref("aqid");
+    aname_sym = symbol_ref("aname");
+    atime_sym = symbol_ref("atime");
+    count_sym = symbol_ref("count");
+    data_sym = symbol_ref("data");
+    dev_sym = symbol_ref("dev");
+    ename_sym = symbol_ref("ename");
+    fid_sym = symbol_ref("fid");
+    gid_sym = symbol_ref("gid");
+    length_sym = symbol_ref("length");
+    mode_sym = symbol_ref("mode");
+    msize_sym = symbol_ref("msize");
+    mtime_sym = symbol_ref("mtime");
+    muid_sym = symbol_ref("muid");
+    name_sym = symbol_ref("name");
+    newfid_sym = symbol_ref("newfid");
+    offset_sym = symbol_ref("offset");
+    oldtag_sym = symbol_ref("oldtag");
+    perm_sym = symbol_ref("perm");
+    qid_sym = symbol_ref("qid");
+    stat_sym = symbol_ref("stat");
+    type_sym = symbol_ref("type");
+    uid_sym = symbol_ref("uid");
+    uname_sym = symbol_ref("uname");
+    wname_sym = symbol_ref("wname");
 
-	add_image_vars(Plan9_image_vars);
-	add_primitives("sys-plan9", Plan9_primitives);
+    dir_sym = symbol_ref("dir");
+    Rattach_sym = symbol_ref("Rattach");
+    Rauth_sym = symbol_ref("Rauth");
+    Rclunk_sym = symbol_ref("Rclunk");
+    Rcreate_sym = symbol_ref("Rcreate");
+    Rerror_sym = symbol_ref("Rerror");
+    Rflush_sym = symbol_ref("Rflush");
+    Ropen_sym = symbol_ref("Ropen");
+    Rread_sym = symbol_ref("Rread");
+    Rremove_sym = symbol_ref("Rremove");
+    Rstat_sym = symbol_ref("Rstat");
+    Rversion_sym = symbol_ref("Rversion");
+    Rwalk_sym = symbol_ref("Rwalk");
+    Rwrite_sym = symbol_ref("Rwrite");
+    Rwstat_sym = symbol_ref("Rwstat");
+    Tattach_sym = symbol_ref("Tattach");
+    Tauth_sym = symbol_ref("Tauth");
+    Tclunk_sym = symbol_ref("Tclunk");
+    Tcreate_sym = symbol_ref("Tcreate");
+    Tflush_sym = symbol_ref("Tflush");
+    Topen_sym = symbol_ref("Topen");
+    Tread_sym = symbol_ref("Tread");
+    Tremove_sym = symbol_ref("Tremove");
+    Tstat_sym = symbol_ref("Tstat");
+    Tversion_sym = symbol_ref("Tversion");
+    Twalk_sym = symbol_ref("Twalk");
+    Twrite_sym = symbol_ref("Twrite");
+    Twstat_sym = symbol_ref("Twstat");
+
+    s9_add_image_vars(Plan9_image_vars);
+    add_primitives("sys-plan9", Plan9_primitives);
 }

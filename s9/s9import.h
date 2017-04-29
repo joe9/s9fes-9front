@@ -186,72 +186,72 @@
  #define intern_symbol		s9_intern_symbol
  #define io_reset		s9_io_reset
  #define io_status		s9_io_status
- #define length			s9_length
- #define load_image		s9_load_image
- #define lock_port		s9_lock_port
- #define make_char		s9_make_char
- #define make_integer		s9_make_integer
- #define make_port		s9_make_port
- #define make_primitive		s9_make_primitive
- #define make_real		s9_make_real
- #define make_string		s9_make_string
- #define make_symbol		s9_make_symbol
- #define make_vector		s9_make_vector
- #define mem_error_handler	s9_mem_error_handler
- #define new_port		s9_new_port
- #define new_vec		s9_new_vec
- #define open_input_port	s9_open_input_port
- #define open_input_string	s9_open_input_string
- #define open_output_port	s9_open_output_port
- #define output_port		s9_output_port
- #define port_eof		s9_port_eof
- #define print_bignum		s9_print_bignum
- #define print_expanded_real	s9_print_expanded_real
- #define print_real		s9_print_real
- #define print_sci_real		s9_print_sci_real
- #define printer_limit		s9_printer_limit
- #define prints			s9_prints
- #define read_counter		s9_read_counter
- #define readc			s9_readc
- #define real_abs		s9_real_abs
- #define real_add		s9_real_add
- #define real_ceil		s9_real_ceil
- #define real_divide		s9_real_divide
- #define real_equal_p		s9_real_equal_p
- #define real_exponent		s9_real_exponent
- #define real_floor		s9_real_floor
- #define real_integer_p		s9_real_integer_p
- #define real_less_p		s9_real_less_p
- #define real_mantissa		s9_real_mantissa
- #define real_multiply		s9_real_multiply
- #define real_negate		s9_real_negate
- #define real_negative_p	s9_real_negative_p
- #define real_positive_p	s9_real_positive_p
- #define real_power		s9_real_power
- #define real_sqrt		s9_real_sqrt
- #define real_subtract		s9_real_subtract
- #define real_to_bignum		s9_real_to_bignum
- #define real_to_string		s9_real_to_string
- #define real_trunc		s9_real_trunc
- #define real_zero_p		s9_real_zero_p
- #define rejectc		s9_rejectc
- #define reset_counter		s9_reset_counter
- #define reset_std_ports	s9_reset_std_ports
- #define run_stats		s9_run_stats
- #define set_input_port		s9_set_input_port
- #define set_node_limit		s9_set_node_limit
- #define set_output_port	s9_set_output_port
- #define set_printer_limit	s9_set_printer_limit
- #define set_vector_limit	s9_set_vector_limit
- #define string_numeric_p	s9_string_numeric_p
- #define string_to_bignum	s9_string_to_bignum
- #define string_to_number	s9_string_to_number
- #define string_to_real		s9_string_to_real
- #define string_to_symbol	s9_string_to_symbol
- #define symbol_ref		s9_symbol_ref
- #define symbol_table		s9_symbol_table
- #define symbol_to_string	s9_symbol_to_string
- #define typecheck		s9_typecheck
- #define unlock_port		s9_unlock_port
- #define unsave			s9_unsave
+/*  #define length			s9_length */
+#define load_image		s9_load_image
+#define lock_port		s9_lock_port
+#define make_char		s9_make_char
+#define make_integer		s9_make_integer
+#define make_port		s9_make_port
+#define make_primitive		s9_make_primitive
+#define make_real		s9_make_real
+#define make_string		s9_make_string
+#define make_symbol		s9_make_symbol
+#define make_vector		s9_make_vector
+#define mem_error_handler	s9_mem_error_handler
+#define new_port		s9_new_port
+#define new_vec		s9_new_vec
+#define open_input_port	s9_open_input_port
+#define open_input_string	s9_open_input_string
+#define open_output_port	s9_open_output_port
+#define output_port		s9_output_port
+#define port_eof		s9_port_eof
+#define print_bignum		s9_print_bignum
+#define print_expanded_real	s9_print_expanded_real
+#define print_real		s9_print_real
+#define print_sci_real		s9_print_sci_real
+#define printer_limit		s9_printer_limit
+#define prints			s9_prints
+#define read_counter		s9_read_counter
+#define readc			s9_readc
+#define real_abs		s9_real_abs
+#define real_add		s9_real_add
+#define real_ceil		s9_real_ceil
+#define real_divide		s9_real_divide
+#define real_equal_p		s9_real_equal_p
+#define real_exponent		s9_real_exponent
+#define real_floor		s9_real_floor
+#define real_integer_p		s9_real_integer_p
+#define real_less_p		s9_real_less_p
+#define real_mantissa		s9_real_mantissa
+#define real_multiply		s9_real_multiply
+#define real_negate		s9_real_negate
+#define real_negative_p	s9_real_negative_p
+#define real_positive_p	s9_real_positive_p
+#define real_power		s9_real_power
+#define real_sqrt		s9_real_sqrt
+#define real_subtract		s9_real_subtract
+#define real_to_bignum		s9_real_to_bignum
+#define real_to_string		s9_real_to_string
+#define real_trunc		s9_real_trunc
+#define real_zero_p		s9_real_zero_p
+#define rejectc		s9_rejectc
+#define reset_counter		s9_reset_counter
+#define reset_std_ports	s9_reset_std_ports
+#define run_stats		s9_run_stats
+#define set_input_port		s9_set_input_port
+#define set_node_limit		s9_set_node_limit
+#define set_output_port	s9_set_output_port
+#define set_printer_limit	s9_set_printer_limit
+#define set_vector_limit	s9_set_vector_limit
+#define string_numeric_p	s9_string_numeric_p
+#define string_to_bignum	s9_string_to_bignum
+#define string_to_number	s9_string_to_number
+#define string_to_real		s9_string_to_real
+#define string_to_symbol	s9_string_to_symbol
+#define symbol_ref		s9_symbol_ref
+#define symbol_table		s9_symbol_table
+#define symbol_to_string	s9_symbol_to_string
+#define typecheck		s9_typecheck
+#define unlock_port		s9_unlock_port
+#define unsave			s9_unsave
 #endif
