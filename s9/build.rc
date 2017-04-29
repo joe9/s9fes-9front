@@ -1,0 +1,26 @@
+#!/bin/rc
+
+# Purpose:
+# run the mk, if c/ovm9.c has changed
+
+# check out /home/j/dev/apps/plan9/custom/idris-9front-backend/src/obsolete.rts/build.rc
+# for a more generic version that runs when any .c or .h file is changed
+# lastcontents=`{ls -l *.[ch] >[2]/dev/null}
+
+# below based on microft7 idea
+# if a file chnges within the same minute, the below script will miss the change.
+mk
+lastcontents=`{du -ta | grep '\.[ch]' >[2]/dev/null}
+last=$"lastcontents
+while (sleep 1) {
+  currentcontents=`{du -ta | grep '\.[ch]' >[2]/dev/null}
+  current=$"currentcontents
+  #   echo 'last contents are: ' $last
+  #   echo 'current contents are: ' $current
+  if (! ~ $current $last) {
+      echo 'last contents are: ' $last
+      echo 'current contents are: ' $current
+      mk
+      last=$current
+  }
+}
