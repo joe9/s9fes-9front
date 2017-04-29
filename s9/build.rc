@@ -9,6 +9,7 @@
 
 # below based on microft7 idea
 # if a file chnges within the same minute, the below script will miss the change.
+mk clean
 mk
 lastcontents=`{du -ta | grep '\.[ch]' >[2]/dev/null}
 last=$"lastcontents
@@ -18,9 +19,10 @@ while (sleep 1) {
   #   echo 'last contents are: ' $last
   #   echo 'current contents are: ' $current
   if (! ~ $current $last) {
-      echo 'last contents are: ' $last
-      echo 'current contents are: ' $current
-      mk
-      last=$current
+    echo 'last contents are: ' $last
+    echo 'current contents are: ' $current
+    mk clean
+    mk
+    last=$current
   }
 }
