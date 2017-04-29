@@ -1140,21 +1140,21 @@ void rehash(cell e) {
 	char		*s;
 
 	if (Program == NIL || k < HASH_THRESHOLD)
-		return;
+	    return;
 	new = new_vec(T_VECTOR, k * sizeof(cell));
 	car(e) = new;
 	v = vector(car(e));
 	for (i=0; i<k; i++)
-		v[i] = NIL;
+	    v[i] = NIL;
 	p = cdr(e);
 	while (p != NIL) {
-		s = symbol_name(caar(p));
-		h = 0;
-		hash(s, h);
-		new = cons(car(p), v[h%k]);
-		v = vector(car(e));
-		v[h%k] = new;
-		p = cdr(p);
+	    s = symbol_name(caar(p));
+	    h = 0;
+	    hash(s, h);
+	    new = cons(car(p), v[h%k]);
+	    v = vector(car(e));
+	    v[h%k] = new;
+	    p = cdr(p);
 	}
 }
 
@@ -1396,24 +1396,24 @@ cell extract_from_defines(cell x, int part, cell *restp) {
 			(k = s9_length(n)) < 3 ||
 			!argument_list_p(cadr(n)) ||
 			(symbol_p(cadr(n)) && k > 3)
-		)
-			return error("define: invalid syntax", n);
+			)
+		    return error("define: invalid syntax", n);
 		if (pair_p(cadr(n))) {
-			/* (define (proc vars) ...) */
-			if (part == VARS) {
-				a = cons(caadr(n), a);
-			}
-			else {
-				a = cons(NIL, a);
-				save(a);
-				new = cons(cdadr(n), cddr(n));
-				new = cons(S_lambda, new);
-				car(a) = new;
-				unsave(1);
-			}
+		    /* (define (proc vars) ...) */
+		    if (part == VARS) {
+			a = cons(caadr(n), a);
+		    }
+		    else {
+			a = cons(NIL, a);
+			save(a);
+			new = cons(cdadr(n), cddr(n));
+			new = cons(S_lambda, new);
+			car(a) = new;
+			unsave(1);
+		    }
 		}
 		else {
-			a = cons(part==VARS? cadr(n): caddr(n), a);
+		    a = cons(part==VARS? cadr(n): caddr(n), a);
 		}
 		x = cdr(x);
 	}
@@ -1453,15 +1453,15 @@ cell sf_lambda(cell x) {
 
 	k = s9_length(x);
 	if (k < 3)
-		return too_few_args(x);
+	    return too_few_args(x);
 	if (!argument_list_p(cadr(x)))
-		return error("malformed argument list", cadr(x));
+	    return error("malformed argument list", cadr(x));
 	if (pair_p(caddr(x)) && caaddr(x) == S_define)
-		n = resolve_local_defines(cddr(x));
+	    n = resolve_local_defines(cddr(x));
 	else if (k > 3)
-		n = cons(S_begin, cddr(x));
+	    n = cons(S_begin, cddr(x));
 	else
-		n = caddr(x);
+	    n = caddr(x);
 	n = cons(n, Environment);
 	n = cons(cadr(x), n);
 	return new_atom(T_FUNCTION, n);
@@ -1480,14 +1480,14 @@ cell sf_set_b(cell x, int *pc, int *ps) {
 	cell	n;
 	int	k;
 
-	k = length(x);
+	k = s9_length(x);
 	if (k < 3) return too_few_args(x);
 	if (k > 3) return too_many_args(x);
 	if (!symbol_p(cadr(x)))
-		return error("set!: expected symbol, got", cadr(x));
+	    return error("set!: expected symbol, got", cadr(x));
 	n = lookup(cadr(x), Environment, 1);
 	if (Error_flag)
-		return NIL;
+	    return NIL;
 	save(n);
 	*pc = 2;
 	*ps = EV_SET_VAL;
@@ -1517,38 +1517,38 @@ cell sf_define(int syntax, cell x, int *pc, int *ps) {
 				x);
 	k = s9_length(x);
 	if (k < 3)
-		return too_few_args(x);
+	    return too_few_args(x);
 	if (symbol_p(cadr(x)) && k > 3)
-		return too_many_args(x);
+	    return too_many_args(x);
 	if (!argument_list_p(cadr(x)))
-		return error(syntax?
-				"define-syntax: expected argument list, got":
-				"define: expected argument list, got",
-				cadr(x));
+	    return error(syntax?
+			 "define-syntax: expected argument list, got":
+			 "define: expected argument list, got",
+			 cadr(x));
 	if (!symbol_p(cadr(x))) {
-		a = cddr(x);
-		a = cons(cdadr(x), a);
-		a = cons(S_lambda, a);
-		save(a);
-		n = caadr(x);
+	    a = cddr(x);
+	    a = cons(cdadr(x), a);
+	    a = cons(S_lambda, a);
+	    save(a);
+	    n = caadr(x);
 	}
 	else {
-		save(NIL);
-		a = caddr(x);
-		n = cadr(x);
+	    save(NIL);
+	    a = caddr(x);
+	    n = cadr(x);
 	}
 	v = find_local_variable(n, car(Environment));
 	if (v == NIL) {
-		new = extend(n, UNDEFINED, car(Environment));
-		car(Environment) = new;
-		v = cadar(Environment);
+	    new = extend(n, UNDEFINED, car(Environment));
+	    car(Environment) = new;
+	    v = cadar(Environment);
 	}
 	car(Stack) = binding_box(v);
 	*pc = 2;
 	if (syntax)
-		*ps = EV_MACRO;
+	    *ps = EV_MACRO;
 	else
-		*ps = EV_SET_VAL;
+	    *ps = EV_SET_VAL;
 	return a;
 }
 
@@ -1753,8 +1753,8 @@ cell cxr(char *op, cell x) {
 		}
 		if (*p == 'a')
 			n = car(n);
-		else 
-			n = cdr(n);
+		else
+		    n = cdr(n);
 	}
 	return n;
 }
@@ -2244,23 +2244,23 @@ cell pp_integer_p(cell x) {
 
 cell list_to_string(char *who, cell x) {
 	cell	n;
-	int	k = length(x);
+	int	k = s9_length(x);
 	char	*s;
 	char	buf[100];
 
 	n = make_string("", k);
 	s = string(n);
 	while (x != NIL) {
-		if (atom_p(x))
-			return error("list->string: improper list", x);
-		if (!char_p(car(x))) {
-			sprintf(buf, "%s: expected list of char,"
-					" got list containing",
-				who);
-			return error(buf, car(x));
-		}
-		*s++ = cadar(x);
-		x = cdr(x);
+	    if (atom_p(x))
+		return error("list->string: improper list", x);
+	    if (!char_p(car(x))) {
+		sprintf(buf, "%s: expected list of char,"
+			" got list containing",
+			who);
+		return error(buf, car(x));
+	    }
+	    *s++ = cadar(x);
+	    x = cdr(x);
 	}
 	*s = 0;
 	return n;
@@ -4151,22 +4151,22 @@ void init_extensions(void) {
 	e = box_value(S_extensions);
 	while (s9 || e != NIL) {
 		if (e == NIL) {
-			s = s9; 
+			s = s9;
 			s9 = NULL;
 		}
 		else {
-			s = string(car(e));
+		    s = string(car(e));
 		}
 		if (strlen(s)*2+1 >= TOKEN_LENGTH)
-			fatal("init_extension(): procedure name too long");
+		    fatal("init_extension(): procedure name too long");
 		sprintf(initproc, "%s:%s", s, s);
 		n = find_symbol(initproc);
 		if (n != NIL) {
-			n = cons(n, NIL);
-			eval(n);
+		    n = cons(n, NIL);
+		    eval(n);
 		}
 		if (e != NIL)
-			e = cdr(e);
+		    e = cdr(e);
 	}
 }
 

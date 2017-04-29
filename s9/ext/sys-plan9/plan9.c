@@ -74,78 +74,78 @@ char	Last_errstr[ERRMAX];
 cell	Catch_errors = 0;
 
 static cell
-	afid_sym,
-	aname_sym,
-	aqid_sym,
-	atime_sym,
-	count_sym,
-	data_sym,
-	dev_sym,
-	ename_sym,
-	fid_sym,
-	gid_sym,
-	length_sym,
-	mode_sym,
-	msize_sym,
-	mtime_sym,
-	muid_sym,
-	name_sym,
-	newfid_sym,
-	offset_sym,
-	oldtag_sym,
-	perm_sym,
-	qid_sym,
-	stat_sym,
-	tag_sym,
-	type_sym,
-	uid_sym,
-	uname_sym,
-	wname_sym,
-	version_sym;
+afid_sym,
+    aname_sym,
+    aqid_sym,
+    atime_sym,
+    count_sym,
+    data_sym,
+    dev_sym,
+    ename_sym,
+    fid_sym,
+    gid_sym,
+    length_sym,
+    mode_sym,
+    msize_sym,
+    mtime_sym,
+    muid_sym,
+    name_sym,
+    newfid_sym,
+    offset_sym,
+    oldtag_sym,
+    perm_sym,
+    qid_sym,
+    stat_sym,
+    tag_sym,
+    type_sym,
+    uid_sym,
+    uname_sym,
+    wname_sym,
+    version_sym;
 
 static cell
-	dir_sym,
-	Rattach_sym,
-	Rauth_sym,
-	Rclunk_sym,
-	Rcreate_sym,
-	Rerror_sym,
-	Rflush_sym,
-	Ropen_sym,
-	Rread_sym,
-	Rremove_sym,
-	Rstat_sym,
-	Rversion_sym,
-	Rwalk_sym,
-	Rwrite_sym,
-	Rwstat_sym,
-	Tattach_sym,
-	Tauth_sym,
-	Tclunk_sym,
-	Tcreate_sym,
-	Tflush_sym,
-	Topen_sym,
-	Tread_sym,
-	Tremove_sym,
-	Tstat_sym,
-	Tversion_sym,
-	Twalk_sym,
-	Twrite_sym,
-	Twstat_sym;
+dir_sym,
+    Rattach_sym,
+    Rauth_sym,
+    Rclunk_sym,
+    Rcreate_sym,
+    Rerror_sym,
+    Rflush_sym,
+    Ropen_sym,
+    Rread_sym,
+    Rremove_sym,
+    Rstat_sym,
+    Rversion_sym,
+    Rwalk_sym,
+    Rwrite_sym,
+    Rwstat_sym,
+    Tattach_sym,
+    Tauth_sym,
+    Tclunk_sym,
+    Tcreate_sym,
+    Tflush_sym,
+    Topen_sym,
+    Tread_sym,
+    Tremove_sym,
+    Tstat_sym,
+    Tversion_sym,
+    Twalk_sym,
+    Twrite_sym,
+    Twstat_sym;
 
 cell *Plan9_image_vars[] = {
-	&afid_sym, &aqid_sym, &aname_sym, &atime_sym, &count_sym,
-	&data_sym, &dev_sym, &ename_sym, &fid_sym, &gid_sym, &length_sym,
-	&mode_sym, &msize_sym, &mtime_sym, &muid_sym, &name_sym,
-	&newfid_sym, &offset_sym, &oldtag_sym, &perm_sym, &qid_sym,
-	&stat_sym, &type_sym, &uid_sym, &uname_sym, &wname_sym, &dir_sym,
-	&Rattach_sym, &Rauth_sym, &Rclunk_sym, &Rcreate_sym, &Rerror_sym,
-	&Rflush_sym, &Ropen_sym, &Rread_sym, &Rremove_sym, &Rstat_sym,
-	&Rversion_sym, &Rwalk_sym, &Rwrite_sym, &Rwstat_sym, &Tattach_sym,
-	&Tauth_sym, &Tclunk_sym, &Tcreate_sym, &Tflush_sym, &Topen_sym,
-	&Tread_sym, &Tremove_sym, &Tstat_sym, &Tversion_sym, &Twalk_sym,
-	&Twrite_sym, &Twstat_sym,
-NULL };
+    &afid_sym, &aqid_sym, &aname_sym, &atime_sym, &count_sym,
+    &data_sym, &dev_sym, &ename_sym, &fid_sym, &gid_sym, &length_sym,
+    &mode_sym, &msize_sym, &mtime_sym, &muid_sym, &name_sym,
+    &newfid_sym, &offset_sym, &oldtag_sym, &perm_sym, &qid_sym,
+    &stat_sym, &type_sym, &uid_sym, &uname_sym, &wname_sym, &dir_sym,
+    &Rattach_sym, &Rauth_sym, &Rclunk_sym, &Rcreate_sym, &Rerror_sym,
+    &Rflush_sym, &Ropen_sym, &Rread_sym, &Rremove_sym, &Rstat_sym,
+    &Rversion_sym, &Rwalk_sym, &Rwrite_sym, &Rwstat_sym, &Tattach_sym,
+    &Tauth_sym, &Tclunk_sym, &Tcreate_sym, &Tflush_sym, &Topen_sym,
+    &Tread_sym, &Tremove_sym, &Tstat_sym, &Tversion_sym, &Twalk_sym,
+    &Twrite_sym, &Twstat_sym,
+    NULL };
 
 enum {
 	STATSIZE = 200//STATFIXLEN + 16 * 4
@@ -424,117 +424,117 @@ cell sys_convM2S(uchar* edir, int len) {
 }
 
 int sys_convS2M(cell x, uchar*buf, int len) {
-	Fcall	*f = (Fcall*)&buf;
-	int	r, flen, i;
-	char	*b, *e;
-	cell	*v;
-	
-	b = (char*)&f[1];
-	e = (char*)buf + len;
-	v = vector(x);
-	i = 2;
-	f->tag = make_ulong_integer(v[1]);
-	if (v[0] == Tversion_sym) {
-		f->type = Tversion;
-		f->version = (char*)b;
-		flen = string_len(v[i]);
-		strncpy(f->version, string(v[i]), flen);
-		f->version[flen++] = 0;
-		b += flen; i++;
-		f->msize = make_ulong_integer(v[i]);
-	} else if (v[0] == Tauth_sym) {
-		f->type = Tauth;
-		f->afid = make_ulong_integer(v[i++]);
-		if (!(f->uname = string2str(v[i++], &b, e)))
-			return -1;
-		if (!(f->aname = string2str(v[i], &b, e)))
-			return -1;
-	} else if (v[0] == Tattach_sym) {
-		f->type = Tattach;
-		f->fid = make_ulong_integer(v[i++]);
-		f->afid = make_ulong_integer(v[i++]);
-		if (!(f->uname = string2str(v[i++], &b, e)))
-			return -1;
-		if (!(f->aname = string2str(v[i], &b, e)))
-			return -1;
-	} else if (v[0] == Tflush_sym) {
-		f->type = Tflush;
-		f->oldtag = make_ulong_integer(v[i]);
-	} else if (v[0] == Twalk_sym) {
-		int j;
-		f->type = Twalk;
-		f->fid = make_ulong_integer(v[i++]);
-		f->newfid = make_ulong_integer(v[i++]);
-		/* XXX check vector */
-		f->nwname = vector_len(v[i]);
-		v = vector(v[i]);
-		for (j = 0; j < f->nwname; j++)
-			if (!(f->wname[j] = string2str(v[j], &b, e)))
-				return -1;
-	} else if (v[0] == Topen_sym) {
-		f->type = Topen;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Tcreate_sym) {
-		f->type = Tcreate;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Tread_sym) {
-		f->type = Tread;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Twrite_sym) {
-		f->type = Twrite;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Tclunk_sym) {
-		f->type = Tclunk;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Tremove_sym) {
-		f->type = Tremove;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Tstat_sym) {
-		f->type = Tstat;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Twstat_sym) {
-		f->type = Twstat;
-		f->fid = make_ulong_integer(v[i]);
+    Fcall	*f = (Fcall*)&buf;
+    int	r, flen, i;
+    char	*b, *e;
+    cell	*v;
 
-	} else if (v[0] == Rversion_sym) {
-		f->type = Rversion;
-		f->msize = make_ulong_integer(v[i++]);
-		if (!(f->version = string2str(v[i], &b, e)))
-			return -1;
-	} else if (v[0] == Rauth_sym) {
-		f->type = Rauth;
-	} else if (v[0] == Rattach_sym) {
-		f->type = Rattach;
-	} else if (v[0] == Rerror_sym) {
-		f->type = Rerror;
-	} else if (v[0] == Rflush_sym) {
-		f->type = Rflush;
-	} else if (v[0] == Rwalk_sym) {
-		f->type = Rwalk;
-	} else if (v[0] == Ropen_sym) {
-		f->type = Ropen;
-	} else if (v[0] == Rcreate_sym) {
-		f->type = Rcreate;
-	} else if (v[0] == Rread_sym) {
-		f->type = Rread;
-	} else if (v[0] == Rwrite_sym) {
-		f->type = Rwrite;
-		f->fid = make_ulong_integer(v[i]);
-	} else if (v[0] == Rclunk_sym) {
-		f->type = Rclunk;
-	} else if (v[0] == Rremove_sym) {
-		f->type = Rremove;
-	} else if (v[0] == Rstat_sym) {
-		f->type = Rstat;
-	} else if (v[0] == Rwstat_sym) {
-		f->type = Rwstat;
-	} else
+    b = (char*)&f[1];
+    e = (char*)buf + len;
+    v = vector(x);
+    i = 2;
+    f->tag = make_ulong_integer(v[1]);
+    if (v[0] == Tversion_sym) {
+	f->type = Tversion;
+	f->version = (char*)b;
+	flen = string_len(v[i]);
+	strncpy(f->version, string(v[i]), flen);
+	f->version[flen++] = 0;
+	b += flen; i++;
+	f->msize = make_ulong_integer(v[i]);
+    } else if (v[0] == Tauth_sym) {
+	f->type = Tauth;
+	f->afid = make_ulong_integer(v[i++]);
+	if (!(f->uname = string2str(v[i++], &b, e)))
+	    return -1;
+	if (!(f->aname = string2str(v[i], &b, e)))
+	    return -1;
+    } else if (v[0] == Tattach_sym) {
+	f->type = Tattach;
+	f->fid = make_ulong_integer(v[i++]);
+	f->afid = make_ulong_integer(v[i++]);
+	if (!(f->uname = string2str(v[i++], &b, e)))
+	    return -1;
+	if (!(f->aname = string2str(v[i], &b, e)))
+	    return -1;
+    } else if (v[0] == Tflush_sym) {
+	f->type = Tflush;
+	f->oldtag = make_ulong_integer(v[i]);
+    } else if (v[0] == Twalk_sym) {
+	int j;
+	f->type = Twalk;
+	f->fid = make_ulong_integer(v[i++]);
+	f->newfid = make_ulong_integer(v[i++]);
+	/* XXX check vector */
+	f->nwname = vector_len(v[i]);
+	v = vector(v[i]);
+	for (j = 0; j < f->nwname; j++)
+	    if (!(f->wname[j] = string2str(v[j], &b, e)))
 		return -1;
-	r = sizeS2M(f);
-	if (r > len)
-		return -1;
-	convS2M(f, buf, len);
-	return r;
+    } else if (v[0] == Topen_sym) {
+	f->type = Topen;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Tcreate_sym) {
+	f->type = Tcreate;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Tread_sym) {
+	f->type = Tread;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Twrite_sym) {
+	f->type = Twrite;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Tclunk_sym) {
+	f->type = Tclunk;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Tremove_sym) {
+	f->type = Tremove;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Tstat_sym) {
+	f->type = Tstat;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Twstat_sym) {
+	f->type = Twstat;
+	f->fid = make_ulong_integer(v[i]);
+
+    } else if (v[0] == Rversion_sym) {
+	f->type = Rversion;
+	f->msize = make_ulong_integer(v[i++]);
+	if (!(f->version = string2str(v[i], &b, e)))
+	    return -1;
+    } else if (v[0] == Rauth_sym) {
+	f->type = Rauth;
+    } else if (v[0] == Rattach_sym) {
+	f->type = Rattach;
+    } else if (v[0] == Rerror_sym) {
+	f->type = Rerror;
+    } else if (v[0] == Rflush_sym) {
+	f->type = Rflush;
+    } else if (v[0] == Rwalk_sym) {
+	f->type = Rwalk;
+    } else if (v[0] == Ropen_sym) {
+	f->type = Ropen;
+    } else if (v[0] == Rcreate_sym) {
+	f->type = Rcreate;
+    } else if (v[0] == Rread_sym) {
+	f->type = Rread;
+    } else if (v[0] == Rwrite_sym) {
+	f->type = Rwrite;
+	f->fid = make_ulong_integer(v[i]);
+    } else if (v[0] == Rclunk_sym) {
+	f->type = Rclunk;
+    } else if (v[0] == Rremove_sym) {
+	f->type = Rremove;
+    } else if (v[0] == Rstat_sym) {
+	f->type = Rstat;
+    } else if (v[0] == Rwstat_sym) {
+	f->type = Rwstat;
+    } else
+	return -1;
+    r = sizeS2M(f);
+    if (r > len)
+	return -1;
+    convS2M(f, buf, len);
+    return r;
 }
 
 cell sys_error(char *who, cell what) {
@@ -574,7 +574,7 @@ cell pp_sys_await(cell) {
 }
 
 cell pp_sys_bind(cell x) {
-	return bind(string(car(x)), string(cadr(x)), 
+	return bind(string(car(x)), string(cadr(x)),
 		integer_value("sys:access", caddr(x))) < 0? FALSE: TRUE;
 }
 
@@ -582,13 +582,13 @@ cell pp_sys_bind(cell x) {
 /* XXX -- not sure how useful this is .... */
 cell pp_sys_brk(cell x) {
 	if (brk((void*)integer_value("sys:brk", car(x))) < 0)
-		return sys_error("sys:brk_", x);
+	    return sys_error("sys:brk_", x);
 	return sys_ok();
 }
 
 /* XXX -- not sure how useful this is .... */
 cell pp_sys_sbrk(cell x) {
-	uintptr bl; 
+	uintptr bl;
 	bl = sbrk(integer_value("sys:sbrk", car(x)));
 	if (bl == (void*)-1)
 		return sys_error("sys:sbrk", x);
@@ -737,13 +737,13 @@ cell pp_sys_exec(cell x) {
 				"sys:exec: expected list of string, got",
 				car(p));
 	}
-	argv = malloc((length(cadr(x)) + 2) * sizeof(char *));
+	argv = malloc((s9_length(cadr(x)) + 2) * sizeof(char *));
 	if (argv == NULL)
-		return sys_error("sys:exec", VOID);
+	    return sys_error("sys:exec", VOID);
 	argv[0] = string(car(x));
 	i = 1;
 	for (p = cadr(x); p != NIL; p = cdr(p))
-		argv[i++] = string(car(p));
+	    argv[i++] = string(car(p));
 	argv[i] = NULL;
 	exec(string(car(x)), argv);
 	return sys_error("sys:exec", x);
@@ -818,9 +818,9 @@ cell pp_sys_mount(cell x) {
 	if (!string_p(cadr(y)))
 		return error("sys:mount: expected string, got", cadr(y));
 	return mount(integer_value(name, car(x)),
-		     integer_value(name, cadr(x)), 
-		     string(caddr(x)), 
-		     integer_value(name, car(y)), 
+		     integer_value(name, cadr(x)),
+		     string(caddr(x)),
+		     integer_value(name, car(y)),
 		     string(cadr(y))) < 0 ? FALSE : TRUE;
 }
 
@@ -850,7 +850,7 @@ cell pp_sys_postnote(cell x) {
 	char	name[] = "sys:postnote";
 	int	r;
 
-	r = postnote(integer_value(name, car(x)), 
+	r = postnote(integer_value(name, car(x)),
 		     integer_value(name, cadr(x)),
 		     string(cadr(x)));
 	if (r < 0)
@@ -1028,8 +1028,8 @@ cell pp_sys_command_line(cell) {
 
 #define	K(x)	{"x", (int)x}
 struct Magic_const {
-	char*	name;
-	int	value;
+    char*	name;
+    int	value;
 };
 
 typedef struct Magic_const Magic_const;
@@ -1107,76 +1107,76 @@ cell pp_sys_magic_const(cell x) {
 
 
 S9_PRIM Plan9_primitives[] = {
- {"sys:alarm",      pp_sys_alarm,      1, 1, { INT,___,___ } },
- {"sys:await",      pp_sys_await,      0, 0, { ___,___,___ } },
- {"sys:bind",       pp_sys_bind,       3, 3, { STR,STR,INT } },
+    {"sys:alarm",      pp_sys_alarm,      1, 1, { INT,___,___ } },
+    {"sys:await",      pp_sys_await,      0, 0, { ___,___,___ } },
+    {"sys:bind",       pp_sys_bind,       3, 3, { STR,STR,INT } },
 #ifdef _BRK
- {"sys:brk",        pp_sys_brk,        1, 1, { INT,___,___ } },
+    {"sys:brk",        pp_sys_brk,        1, 1, { INT,___,___ } },
 #endif
- {"sys:catch-errors",pp_sys_catch_errors,1,1,{ BOL,___,___ } },
- {"sys:chdir",      pp_sys_chdir,      1, 1, { STR,___,___ } },
- {"sys:close",      pp_sys_close,      1, 1, { INT,___,___ } },
- {"sys:create",     pp_sys_create,     3, 3, { STR,INT,INT } },
- {"sys:convd2m",    pp_sys_convD2M,    1, 1, { VEC,___,___ } },
- {"sys:dirread",    pp_sys_dirread,    1, 1, { INT,___,___ } },
- {"sys:dup",        pp_sys_dup,        2, 2, { INT,INT,___ } },
- {"sys:errstr",     pp_sys_errstr,     1, 1, { STR,___,___ } },
- {"sys:exec",       pp_sys_exec,       2, 2, { STR,LST,___ } },
- {"sys:exits",      pp_sys_exits,      1, 1, { STR,___,___ } },
- {"sys:fauth",      pp_sys_fauth,      0, 0, { ___,___,___ } },
- {"sys:convs2m",    pp_sys_convS2M,    1, 1, { VEC,___,___ } },
- {"sys:fd2path",    pp_sys_fd2path,    1, 1, { INT,___,___ } },
- {"sys:fork",       pp_sys_fork,       0, 0, { ___,___,___ } },
- {"sys:fstat",      pp_sys_fstat,      1, 1, { INT,___,___ } },
+    {"sys:catch-errors",pp_sys_catch_errors,1,1,{ BOL,___,___ } },
+    {"sys:chdir",      pp_sys_chdir,      1, 1, { STR,___,___ } },
+    {"sys:close",      pp_sys_close,      1, 1, { INT,___,___ } },
+    {"sys:create",     pp_sys_create,     3, 3, { STR,INT,INT } },
+    {"sys:convd2m",    pp_sys_convD2M,    1, 1, { VEC,___,___ } },
+    {"sys:dirread",    pp_sys_dirread,    1, 1, { INT,___,___ } },
+    {"sys:dup",        pp_sys_dup,        2, 2, { INT,INT,___ } },
+    {"sys:errstr",     pp_sys_errstr,     1, 1, { STR,___,___ } },
+    {"sys:exec",       pp_sys_exec,       2, 2, { STR,LST,___ } },
+    {"sys:exits",      pp_sys_exits,      1, 1, { STR,___,___ } },
+    {"sys:fauth",      pp_sys_fauth,      0, 0, { ___,___,___ } },
+    {"sys:convs2m",    pp_sys_convS2M,    1, 1, { VEC,___,___ } },
+    {"sys:fd2path",    pp_sys_fd2path,    1, 1, { INT,___,___ } },
+    {"sys:fork",       pp_sys_fork,       0, 0, { ___,___,___ } },
+    {"sys:fstat",      pp_sys_fstat,      1, 1, { INT,___,___ } },
 #ifdef FOO
- {"sys:fversion",   pp_sys_fversion,   0, 0, { ___,___,___ } },
+    {"sys:fversion",   pp_sys_fversion,   0, 0, { ___,___,___ } },
 #endif
- {"sys:fwstat",     pp_sys_fwstat,     2, 2, { INT,STR,___ } },
- {"sys:magic-const",pp_sys_magic_const,1, 1, { STR,___,___ } },
- {"sys:mount",      pp_sys_mount,      5, 5, { INT,INT,STR } },
- {"sys:convm2d",    pp_sys_convM2D,    1, 1, { STR,___,___ } },
- {"sys:convm2s",    pp_sys_convM2S,    1, 1, { STR,___,___ } },
+    {"sys:fwstat",     pp_sys_fwstat,     2, 2, { INT,STR,___ } },
+    {"sys:magic-const",pp_sys_magic_const,1, 1, { STR,___,___ } },
+    {"sys:mount",      pp_sys_mount,      5, 5, { INT,INT,STR } },
+    {"sys:convm2d",    pp_sys_convM2D,    1, 1, { STR,___,___ } },
+    {"sys:convm2s",    pp_sys_convM2S,    1, 1, { STR,___,___ } },
 #ifdef FOO
- {"sys:noted",      pp_sys_noted,      1, 1, { INT,___,___ } },
- {"sys:notify",     pp_sys_notify,     1, 1, { STR,___,___ } },
+    {"sys:noted",      pp_sys_noted,      1, 1, { INT,___,___ } },
+    {"sys:notify",     pp_sys_notify,     1, 1, { STR,___,___ } },
 #endif
- {"sys:open",       pp_sys_open,       2, 2, { STR,INT,___ } },
- {"sys:pipe",       pp_sys_pipe,       0, 0, { ___,___,___ } },
- {"sys:postnote",   pp_sys_postnote,   3, 3, { INT,INT,STR } },
- {"sys:pread",      pp_sys_pread,      3, 3, { INT,INT,INT } },
- {"sys:pwrite",     pp_sys_pwrite,     3, 3, { INT,STR,INT } },
- {"sys:read",       pp_sys_read,       2, 2, { INT,INT,___ } },
- {"sys:remove",     pp_sys_remove,     1, 1, { STR,___,___ } },
- {"sys:rendezvous", pp_sys_rendezvous, 2, 2, { SYM,STR,___ } },
- {"sys:rfork",      pp_sys_rfork,      1, 1, { INT,___,___ } },
+    {"sys:open",       pp_sys_open,       2, 2, { STR,INT,___ } },
+    {"sys:pipe",       pp_sys_pipe,       0, 0, { ___,___,___ } },
+    {"sys:postnote",   pp_sys_postnote,   3, 3, { INT,INT,STR } },
+    {"sys:pread",      pp_sys_pread,      3, 3, { INT,INT,INT } },
+    {"sys:pwrite",     pp_sys_pwrite,     3, 3, { INT,STR,INT } },
+    {"sys:read",       pp_sys_read,       2, 2, { INT,INT,___ } },
+    {"sys:remove",     pp_sys_remove,     1, 1, { STR,___,___ } },
+    {"sys:rendezvous", pp_sys_rendezvous, 2, 2, { SYM,STR,___ } },
+    {"sys:rfork",      pp_sys_rfork,      1, 1, { INT,___,___ } },
 #ifdef _BRK
- {"sys:sbrk",       pp_sys_sbrk,       1, 1, { INT,___,___ } },
+    {"sys:sbrk",       pp_sys_sbrk,       1, 1, { INT,___,___ } },
 #endif
- {"sys:seek",       pp_sys_seek,       3, 3, { INT,INT,INT } },
+    {"sys:seek",       pp_sys_seek,       3, 3, { INT,INT,INT } },
 #ifdef _BRK
- {"sys:segattach",  pp_sys_segattach,  0, 0, { ___,___,___ } },
- {"sys:segbrk",     pp_sys_segbrk,     0, 0, { ___,___,___ } },
- {"sys:segdetach",  pp_sys_segdetach,  0, 0, { ___,___,___ } },
- {"sys:segflush",   pp_sys_segflush,   0, 0, { ___,___,___ } },
- {"sys:segfree",    pp_sys_segfree,    0, 0, { ___,___,___ } },
- {"sys:semacquire", pp_sys_semacquire, 0, 0, { ___,___,___ } },
- {"sys:semrelease", pp_sys_semrelease, 0, 0, { ___,___,___ } },
+    {"sys:segattach",  pp_sys_segattach,  0, 0, { ___,___,___ } },
+    {"sys:segbrk",     pp_sys_segbrk,     0, 0, { ___,___,___ } },
+    {"sys:segdetach",  pp_sys_segdetach,  0, 0, { ___,___,___ } },
+    {"sys:segflush",   pp_sys_segflush,   0, 0, { ___,___,___ } },
+    {"sys:segfree",    pp_sys_segfree,    0, 0, { ___,___,___ } },
+    {"sys:semacquire", pp_sys_semacquire, 0, 0, { ___,___,___ } },
+    {"sys:semrelease", pp_sys_semrelease, 0, 0, { ___,___,___ } },
 #endif
- {"sys:sleep",      pp_sys_sleep,      1, 1, { INT,___,___ } },
- {"sys:stat",       pp_sys_stat,       1, 1, { STR,___,___ } },
+    {"sys:sleep",      pp_sys_sleep,      1, 1, { INT,___,___ } },
+    {"sys:stat",       pp_sys_stat,       1, 1, { STR,___,___ } },
 #ifdef FOO
- {"sys:sysr1",      pp_sys_sysr1,      0, 0, { ___,___,___ } },
+    {"sys:sysr1",      pp_sys_sysr1,      0, 0, { ___,___,___ } },
 #endif
- {"sys:unmount",    pp_sys_unmount,    2, 2, { STR,STR,___ } },
- {"sys:wait",       pp_sys_wait,       0, 0, { ___,___,___ } },
- {"sys:waitpid",    pp_sys_waitpid,    0, 0, { ___,___,___ } },
- {"sys:write",      pp_sys_write,      2, 2, { INT,STR,___ } },
- {"sys:wstat",      pp_sys_wstat,      2, 2, { STR,STR,___ } },
+    {"sys:unmount",    pp_sys_unmount,    2, 2, { STR,STR,___ } },
+    {"sys:wait",       pp_sys_wait,       0, 0, { ___,___,___ } },
+    {"sys:waitpid",    pp_sys_waitpid,    0, 0, { ___,___,___ } },
+    {"sys:write",      pp_sys_write,      2, 2, { INT,STR,___ } },
+    {"sys:wstat",      pp_sys_wstat,      2, 2, { STR,STR,___ } },
 
- /* Not syscalls but required... */
- {"sys:command-line",pp_sys_command_line,0,0,{ ___,___,___ } },
+    /* Not syscalls but required... */
+    {"sys:command-line",pp_sys_command_line,0,0,{ ___,___,___ } },
 
- {NULL}
+    {NULL}
 };
 
 void sys_init(void) {

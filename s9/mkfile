@@ -6,7 +6,7 @@
 TARG=		s9
 OFILES=		s9.$O s9core.$O plan9.$O s9-ffi.$O
 CLEANFILES=	s9.image test.image
-CFLAGS=		$CFLAGS -Dplan9 '-DEXTENSIONS=sys_init();'
+CFLAGS=		$CFLAGS -v -Dplan9 '-DEXTENSIONS=sys_init();'
 EXTRASCM=	-l ext/sys-plan9/plan9.scm -l ext/sys-plan9/plan9-tools.scm
 
 s9dir=		/lib/s9fes

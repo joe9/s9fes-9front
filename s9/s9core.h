@@ -68,17 +68,17 @@
  #include <libc.h>
  #include <stdio.h>
  #include <ctype.h>
- #define bye(x)	exits((x)? "error": NULL)
- #define ptrdiff_t int
+#define bye(x)	exits((x)? "error": NULL)
+#define ptrdiff_t int
 #endif
 
 #ifdef unix
- #include <stdlib.h>
- #include <stddef.h>
- #include <stdio.h>
- #include <string.h>
- #include <ctype.h>
- #define bye(x)	exit((x)? EXIT_FAILURE: EXIT_SUCCESS);
+#include <stdlib.h>
+#include <stddef.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#define bye(x)	exit((x)? EXIT_FAILURE: EXIT_SUCCESS);
 #endif
 
 /* An "s9_cell" must be large enough to hold a pointer */
@@ -105,25 +105,25 @@
 /* ... or try some magic constants (unreliable, though) ... */
 
 #ifdef __amd64__
- #define S9_BITS_PER_WORD_64
+#define S9_BITS_PER_WORD_64
 #endif
 #ifdef __amd64
- #define S9_BITS_PER_WORD_64
+#define S9_BITS_PER_WORD_64
 #endif
 #ifdef __x86_64__
- #define S9_BITS_PER_WORD_64
+#define S9_BITS_PER_WORD_64
 #endif
 #ifdef __x86_64
- #define S9_BITS_PER_WORD_64
+#define S9_BITS_PER_WORD_64
 #endif
 
 /* ... or assume a reasonable default */
 #ifndef S9_BITS_PER_WORD_16
- #ifndef S9_BITS_PER_WORD_32
-  #ifndef S9_BITS_PER_WORD_64
-   #define S9_BITS_PER_WORD_32
-  #endif
- #endif
+#ifndef S9_BITS_PER_WORD_32
+#ifndef S9_BITS_PER_WORD_64
+#define S9_BITS_PER_WORD_32
+#endif
+#endif
 #endif
 
 /*
@@ -144,23 +144,23 @@
  */
 
 #ifdef S9_BITS_PER_WORD_64
- #define S9_DIGITS_PER_CELL	18
- #define S9_INT_SEG_LIMIT	1000000000000000000LL
- #define S9_MANTISSA_SEGMENTS	1
+#define S9_DIGITS_PER_CELL	18
+#define S9_INT_SEG_LIMIT	1000000000000000000LL
+#define S9_MANTISSA_SEGMENTS	1
 #else
- #ifdef S9_BITS_PER_WORD_32
-  #define S9_DIGITS_PER_CELL	9
-  #define S9_INT_SEG_LIMIT	1000000000L
-  #define S9_MANTISSA_SEGMENTS	2
- #else
-  #ifdef S9_BITS_PER_WORD_16
-   #define S9_DIGITS_PER_CELL	4
-   #define S9_INT_SEG_LIMIT	10000
-   #define S9_MANTISSA_SEGMENTS	2
-  #else
-   #error "S9_BITS_PER_WORD_* undefined (this should not happen)"
-  #endif
- #endif
+#ifdef S9_BITS_PER_WORD_32
+#define S9_DIGITS_PER_CELL	9
+#define S9_INT_SEG_LIMIT	1000000000L
+#define S9_MANTISSA_SEGMENTS	2
+#else
+#ifdef S9_BITS_PER_WORD_16
+#define S9_DIGITS_PER_CELL	4
+#define S9_INT_SEG_LIMIT	10000
+#define S9_MANTISSA_SEGMENTS	2
+#else
+#error "S9_BITS_PER_WORD_* undefined (this should not happen)"
+#endif
+#endif
 #endif
 
 /*
@@ -210,9 +210,9 @@
  * Structures
  */
 
-struct S9_counter {
-	int	n, n1k, n1m, n1g, n1t;
-};
+			struct S9_counter {
+			    int	n, n1k, n1m, n1g, n1t;
+			};
 
 #define s9_counter	struct S9_counter
 
@@ -287,16 +287,16 @@ struct S9_primitive {
 #define s9_cdddar(x)       (S9_cdr[S9_cdr[S9_cdr[S9_car[x]]]])
 #define s9_cddddr(x)       (S9_cdr[S9_cdr[S9_cdr[S9_cdr[x]]]])
 
-/*
- * Type predicates
- */
+	/*
+	 * Type predicates
+	 */
 
 #define s9_eof_p(n)		((n) == S9_END_OF_FILE)
 #define s9_undefined_p(n)	((n) == S9_UNDEFINED)
 #define s9_unspecific_p(n)	((n) == S9_UNSPECIFIC)
 
-#define s9_boolean_p(n)	\
-	((n) == S9_TRUE || (n) == S9_FALSE)
+#define s9_boolean_p(n)				\
+    ((n) == S9_TRUE || (n) == S9_FALSE)
 
 #define s9_constant_p(n)				\
     (!s9_special_p(n) && (s9_tag(n) & S9_CONST_TAG))
@@ -340,11 +340,11 @@ struct S9_primitive {
 
 #define s9_pair_p(x) (!s9_atom_p(x))
 
-#define s9_type_tag(n) \
-	(S9_TRUE == (n)? S9_T_BOOLEAN: \
-	 S9_FALSE == (n)? S9_T_BOOLEAN: \
-	 (!s9_special_p(n) && (tag(n) & (S9_ATOM_TAG|S9_VECTOR_TAG))? car(n): \
-	 S9_T_NONE))
+#define s9_type_tag(n)							\
+    (S9_TRUE == (n)? S9_T_BOOLEAN:					\
+     S9_FALSE == (n)? S9_T_BOOLEAN:					\
+     (!s9_special_p(n) && (s9_tag(n) & (S9_ATOM_TAG|S9_VECTOR_TAG))? car(n): \
+      S9_T_NONE))
 
 /*
  * Allocators
@@ -378,27 +378,27 @@ struct S9_primitive {
  * Real-number arithmetics
  */
 
-#define S9_real_zero_p(x) \
-	(car(S9_real_mantissa(x)) == 0 && cdr(S9_real_mantissa(x)) == S9_NIL)
+#define S9_real_zero_p(x)						\
+    (car(S9_real_mantissa(x)) == 0 && cdr(S9_real_mantissa(x)) == S9_NIL)
 
-#define S9_real_negative_p(x) \
-	(S9_real_negative_flag(x) && !S9_real_zero_p(x))
+#define S9_real_negative_p(x)				\
+    (S9_real_negative_flag(x) && !S9_real_zero_p(x))
 
-#define S9_real_positive_p(x) \
-	(!S9_real_negative_flag(x) && !S9_real_zero_p(x))
+#define S9_real_positive_p(x)				\
+    (!S9_real_negative_flag(x) && !S9_real_zero_p(x))
 
-#define S9_real_negate(a) \
-	S9_make_quick_real(S9_real_flags(a) & S9_REAL_NEGATIVE?	\
-			S9_real_flags(a) & ~S9_REAL_NEGATIVE: \
-			S9_real_flags(a) |  S9_REAL_NEGATIVE, \
-			S9_real_exponent(a), S9_real_mantissa(a))
+#define S9_real_negate(a)						\
+    S9_make_quick_real(S9_real_flags(a) & S9_REAL_NEGATIVE?		\
+		       S9_real_flags(a) & ~S9_REAL_NEGATIVE:		\
+		       S9_real_flags(a) |  S9_REAL_NEGATIVE,		\
+		       S9_real_exponent(a), S9_real_mantissa(a))
 
 /*
  * Globals
  */
 
 extern s9_cell	*S9_car,
-		*S9_cdr;
+    *S9_cdr;
 extern char	*S9_tag;
 
 extern s9_cell	*S9_vectors;
@@ -408,17 +408,17 @@ extern s9_cell	S9_stack;
 extern S9_PRIM	*S9_primitives;
 
 extern s9_cell	S9_zero,
-		S9_one,
-		S9_two,
-		S9_ten;
+    S9_one,
+    S9_two,
+    S9_ten;
 
 extern s9_cell	S9_epsilon;
 
 extern FILE	*S9_ports[];
 
 extern int	S9_input_port,
-		S9_output_port,
-		S9_error_port;
+    S9_output_port,
+    S9_error_port;
 
 /*
  * Prototypes
