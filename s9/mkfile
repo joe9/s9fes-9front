@@ -19,7 +19,7 @@ s9:	$O.out
 	cp $prereq $target
 
 s9.image:	s9 s9.scm config.scm
-	./s9 -i - -l config.scm $EXTRASCM -d $target
+	S9FES_LIBRARY_PATH=.:lib:ext/sys-unix:ext/curses:ext/csv:contrib ./s9 -i - -l config.scm $EXTRASCM -d $target
 
 plan9.$O: ext/sys-plan9/plan9.c
 	$CC $CFLAGS -I `{pwd} ext/sys-plan9/plan9.c
