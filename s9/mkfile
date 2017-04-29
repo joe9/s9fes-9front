@@ -31,10 +31,10 @@ libtest:V: s9 test.image
 	ape/psh util/$target.sh
 
 %test:V: s9 test.image util/%test.scm
-	./s9 -i test -f util/$target.scm
+	S9FES_LIBRARY_PATH=.:lib:ext/sys-unix:ext/curses:ext/csv:contrib ./s9 -i test -f util/$target.scm
 
 test.image: s9 s9.scm
-	./s9 -i - -d $target
+	S9FES_LIBRARY_PATH=.:lib:ext/sys-unix:ext/curses:ext/csv:contrib ./s9 -i - -d $target
 
 inst: s9 s9.image
 	mkdir -p $s9dir
